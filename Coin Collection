@@ -154,20 +154,31 @@ DOMDisplay.prototype.drawBackground = function() {
 // Draw the actors
 DOMDisplay.prototype.drawActors = function() {
   // Create a new container div for actor dom elements
+  var playerwrap = elt("div");
   var wrap = elt("div");
 
   //var actor = this.level.player;
   //going through every actor in our array. a for loop for all parts
-  this.level.actors.forEach(function(actor) {
+    this.level.actors.forEach(function(actor) {
+
+  
 	var rect = wrap.appendChild(elt("div",
                                     "actor " + actor.type));
 									//note the space after actor!
+  var fish = playerwrap.appendChild(elt("div", "actor " + actor.type));
+
+  
+  if (actor.type == "player"){
+    fish.style.width = actor.size.x + "px";
+    fish.style.height = actor.size.y + "px";
+  }
 	//this is where actor turns into something visible on screen
-	rect.style.width = actor.size.x * scale + "px";
-	rect.style.height = actor.size.y * scale + "px";
-	rect.style.left = actor.pos.x * scale + "px";
-	rect.style.top = actor.pos.y * scale + "px";
-  })
+	 rect.style.width = actor.size.x * scale + "px";
+	 rect.style.height = actor.size.y * scale + "px";
+	 rect.style.left = actor.pos.x * scale + "px";
+	 rect.style.top = actor.pos.y * scale + "px";
+    })
+  return playerwrap;
   return wrap;
 };
 
