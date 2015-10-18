@@ -1,6 +1,7 @@
 var actorChars = {
 	'@': Player,
-	'o': Coin
+	'o': Coin,
+	'p': otherCoin
 };
 //here is where you add any symbol that creates another actor! enemies, spikes, anything
 //make sure that character matches the game_levels character
@@ -43,6 +44,7 @@ function Level(plan) {
       // Because there is a third case (space ' '), use an "else if" instead of "else"
       else if (ch == "!")
         fieldType = "lava";
+	
 
       // "Push" the fieldType, which is a string, onto the gridLine array (at the end).
       gridLine.push(fieldType);
@@ -92,6 +94,19 @@ function Coin(pos) {
 }
 //lets filter find coin
 Coin.prototype.type = "coin";
+
+//otherCoin constructor
+function otherCoin(pos) {
+	//position of coin shifted so not on the baseline
+	this.basePos = pos.plus(new Vector(0.2, 0.1));
+	this.pos = pos.plus(new Vector(0.2, 0.1));
+	this.size = new Vector(0.6, 0.6);
+	//animating the coin
+	this.enemyMove = Math.random() * Math.PI * 3;
+}
+
+//lets filter find other coin
+otherCoin.prototype.type = "othercoin";
 
 // Helper function to easily create an element of a type provided 
 // and assign it a class.
@@ -231,11 +246,22 @@ var maxStep = 0.05;
 var wobbleSpeed = 8;
 var wobbleDist = 0.07;
 
+//enemy motion
+var enemySpeed = 10;
+var enemyDist = 5;
+
 Coin.prototype.act = function(step) {
 	//note that only the first parameter of ___ function is used. parameter order matters!
 	this.wobble += step * wobbleSpeed;
 	var wobblePos = Math.sin(this.wobble) * wobbleDist;
 	this.pos = this.basePos.plus(new Vector(0, wobblePos));
+}
+
+otherCoin.prototype.act = function(step) {
+	//note that only the first parameter of ___ function is used. parameter order matters!
+	this.enemyMove += step * enemySpeed;
+	var enemyPos = Math.cos(this.enemyMove) * enemyDist;
+	this.pos = this.basePos.plus(new Vector(0, enemyPos));
 }
 
 Level.prototype.obstacleAt = function(pos, size) {
@@ -332,7 +358,7 @@ Player.prototype.act = function(step, level, keys) {
 
 Level.prototype.playerTouched = function(type, actor) {
 	//new logic for every new actor here
-	if (type == 'coin') {
+	if (type == 'coin' || type == 'othercoin') {
 		this.actors = this.actors.filter(function(other) {
 			//cutting out the desired actor on the display, will no longer exist
 			return other != actor;
