@@ -1,4 +1,4 @@
-.background    { background: rgb(52, 166, 251);
+.background    { background: linear-gradient(rgb(92, 180, 204),rgb(0,85,176));
                  table-layout: fixed;
                  border-spacing: 0;   }
 .background td { padding: 0;          }
@@ -7,7 +7,11 @@
 
 .actor { position: absolute;  }
 .coin { background: rgb(241, 229, 89); }
-.player { background: rgb(64, 64, 64); }
+.player { 
+	background-image: url(fish-player.png);
+	width: 35px;
+	height: 30px;
+	 }
 .othercoin { background: rgb(255, 0, 255); }
 
 .game {
