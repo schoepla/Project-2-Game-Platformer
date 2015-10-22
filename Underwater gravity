@@ -2,7 +2,7 @@
 var actorChars = {
   "@": Player,
   "o": Coin, // A coin will wobble up and down
-  "=": Lava, "|": Lava, "v": Lava  
+  "=": Lava, "|": Lava, "v": Lava,  
 };
 
 function Level(plan) {
@@ -35,7 +35,6 @@ function Level(plan) {
         this.actors.push(new Actor(new Vector(x, y), ch));
       else if (ch == "x")
         fieldType = "wall";
-      // Because there is a third case (space ' '), use an "else if" instead of "else"
       else if (ch == "!")
         fieldType = "lava";
 
@@ -132,7 +131,7 @@ function DOMDisplay(parent, level) {
   this.drawFrame();
 }
 
-var scale = 20;
+var scale = 35;
 
 DOMDisplay.prototype.drawBackground = function() {
   var table = elt("table", "background");
@@ -164,10 +163,15 @@ DOMDisplay.prototype.drawActors = function() {
     rect.style.left = actor.pos.x * scale + "px";
     rect.style.top = actor.pos.y * scale + "px";
 	
+  //allow imported original actor artwork to show on screen
 	if (actor.type == "player") {
-		rect.style.width = actor.size.x * 43 + "px";
-		rect.style.height = actor.size.y * 20+ "px";
+		rect.style.width = actor.size.x * scale + "px";
+		rect.style.height = actor.size.y * scale + "px";
 	}
+  else if (actor.type == "coin") {
+    rect.style.width = actor.size.x * scale + "px";
+    rect.style.height = actor.size.y * scale + "px";
+  }
   });
   return wrap;
 };
@@ -312,7 +316,7 @@ Coin.prototype.act = function(step) {
 var maxStep = 0.05;
 
 var playerXSpeed = 7;
-var playerYSpeed = 10;
+var playerYSpeed = 7;
 
 Player.prototype.moveX = function(step, level, keys) {
   this.speed.x = 0;
@@ -333,25 +337,25 @@ Player.prototype.moveX = function(step, level, keys) {
 };
 
 var gravity = -2;
-var jumpSpeed = 17;
+var jumpSpeed = 3;
 
 Player.prototype.moveY = function(step, level, keys) {
   // Accelerate player upward (always)
   this.speed.y += step * gravity;
   var motion = new Vector(0, this.speed.y * step);
   var newPos = this.pos.plus(motion);
-  //var obstacle = level.obstacleAt(newPos, this.size);
+  var obstacle = level.obstacleAt(newPos, this.size);
   if (keys.down) this.speed.y += playerYSpeed * step;
   if (keys.up) this.speed.y -= playerYSpeed * step;
   // The floor is also an obstacle -- only allow players to 
   // jump if they are touching some obstacle.
-  /*if (obstacle) {
+  if (obstacle) {
     level.playerTouched(obstacle);
     if (keys.down && this.speed.y > 0)
       this.speed.y = jumpSpeed;
     else
       this.speed.y = 0;
-  } */ else {
+  } else {
     this.pos = newPos;
   }
 };
