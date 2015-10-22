@@ -2,17 +2,16 @@
                  table-layout: fixed;
                  border-spacing: 0;   }
 .background td { padding: 0;          }
-.lava          { background: rgb(255, 100, 100); }
+.lava          { background-image: url(rocks-inverted.png);
+                  background-repeat: none;}
 .wall          { background: white;   }
 
 .actor { position: absolute;  }
-.coin { background: rgb(241, 229, 89); }
+.coin { background-image: url(coin.png);
+  background-repeat: none; }
 .player { 
 	background-image: url(fish-player.png);
-	width: 35px;
-	height: 30px;
-	 }
-.othercoin { background: rgb(255, 0, 255); }
+background-repeat: none;}
 
 .game {
   overflow: hidden;
