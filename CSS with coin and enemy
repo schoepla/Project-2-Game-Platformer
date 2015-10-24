@@ -2,9 +2,10 @@
                  table-layout: fixed;
                  border-spacing: 0;   }
 .background td { padding: 0;          }
-.lava          { background-image: url(rocks-inverted.png);
-                  background-repeat: none;}
-.wall          { background: white;   }
+.rocks { background-image: url(rocks.png);
+         background-repeat: none;}
+.wall { background: white;   }
+
 
 .actor { position: absolute;  }
 .coin { background-image: url(coin.png);
