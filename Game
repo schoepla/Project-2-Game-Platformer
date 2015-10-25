@@ -509,9 +509,12 @@ function runGame(plans, Display) {
       if (status == "lost") {
         //player can only lose 3 times, then will restart to level 1
         if (losses == 3) {
-            //change this to a new screen
-            console.log("You lose! Try again.");
-            startLevel(n - 1);
+            //show You Lose screen
+            //startLevel(4);
+            this.finishDelay = 3;
+            //console.log("You lose! Try again.");
+            //3 losses results in player starting at previous level
+            startLevel(0);
         }
         else 
           startLevel(n);
