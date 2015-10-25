@@ -411,17 +411,15 @@ Level.prototype.playerTouched = function(type, actor) {
   if ((type == "rocks" || type == "shark") && this.status == null) {
     this.status = "lost";
     this.finishDelay = 1;
-  } 
-  //coin collection
-  else if (type == "coin" || type == "star") {
+  } else if (type == "coin" || type == "star") {
     this.actors = this.actors.filter(function(other) {
-      //makes coin disappear
       return other != actor;
     });
-    // If there aren't any coins left, player wins
+    // If there aren't any coins or a star left, player wins
     if (!this.actors.some(function(actor) {
-           return actor.type == "coin";
-           //return actor.type == "star";
+           //return actor.type == "coin";
+           //need both coins and star to be collected here
+           return actor.type == "star" && "coin";
          })) {
       this.status = "won";
       this.finishDelay = 1;
