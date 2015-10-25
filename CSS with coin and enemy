@@ -2,17 +2,21 @@
                  table-layout: fixed;
                  border-spacing: 0;   }
 .background td { padding: 0;          }
-.rocks { background-image: url(http://i59.tinypic.com/se5ank.png);
+.rocks { background-image: url(rocks.png);
          background-repeat: none;}
-.wall { background-image: url(http://i60.tinypic.com/72ywqa.png);   }
-.shark { background-image: url(http://i60.tinypic.com/15efw3m.png);
+.wall { background-image: url(wall.png);   }
+.loseScreen {background-image: url(loseScreen.png);
+          background-repeat: none;}
+.shark { background-image: url(shark.png);
+  background-repeat: none;}
+.star {background-image: url(star.png);
   background-repeat: none;}
 
 .actor { position: absolute;  }
-.coin { background-image: url(http://i59.tinypic.com/1563hbo.png);
+.coin { background-image: url(coin.png);
   background-repeat: none; }
 .player { 
-	background-image: url(http://i58.tinypic.com/256gxn5.png);
+	background-image: url(fish-player.png);
 background-repeat: none;}
 
 .game {
@@ -21,3 +25,4 @@ background-repeat: none;}
   max-height: 450px;
   position: relative;
 }
+
