@@ -31,7 +31,7 @@ var GAME_LEVELS = [
    "                                 !    x!!x                           =                                        !x  ",
    "                                 !    x!!xxxxxxxxxx                                                           !x  ",
    "                                 !    xx!!!!!!!!!!xx                                                          !x  ",
-   "                                 !     xxxxxxxxxx!!x         x               x                                !x  ",
+   "                                 !     xxxxxxxxxx!!x                                                          !x  ",
    "                                 !              xx!x         x               x                          oo    !x  ",
    "                                 !               x!x         x               x                               !!x  ",
    "                                 !               xvx         x     o   o     x                  !!!!!!!!  !!!!xx  ",
@@ -41,10 +41,10 @@ var GAME_LEVELS = [
    "                                               x     x            xxxxxxx                                         ",
    "                                        xxxxxxxx     x                                                            ",
    "                                               x     x                                                            ",
-   "                                                            o                                      |   o   |   o  ",
+   "                                                            o                                      |   o   |      ",
    "                                                              xxxxxx!!!!!!!xxxxxxxxxxxx      xxxxxxxxxxxxxxxxxxxx ",
    "                                               x     x                                                            ",
-   "!              xxxxxxx          x   x          x     x                                                            ",
+   "!              xxxxxxx          xxxxx          x     x                                                            ",
    "!             xx  o  xx         x   x          x     x                                                            ",
    "!            xx       xx        x o x          x     x                                 xxxxxx                     ",
    "!            x         x        x   x          x     x                                                            ",
@@ -142,6 +142,8 @@ var GAME_LEVELS = [
    "        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   x!!!!!!!!!!!!!!!!!!!!!xxx!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
    "                                                  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
    "                                                                                                              "]
+   //You Win/Lose screen
+  ["                                                                                                             "]
 ];
 
 if (typeof module != "undefined" && module.exports)
