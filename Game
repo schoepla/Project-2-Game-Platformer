@@ -494,13 +494,7 @@ function runLevel(level, Display, andThen) {
         andThen(level.status);
         if (level.status == "lost") {
           losses++;
-          console.log(losses);
-          if (losses == 3) {
-            //change this to a new screen
-            console.log("You lose! Try again.");
-            runGame(plans, Display);
-
-          }
+          //console.log(losses);
         }
       return false;
     }
@@ -513,12 +507,17 @@ function runGame(plans, Display) {
     // Pass in a reference to Display function, DOMDisplay (in index.html).
     runLevel(new Level(plans[n]), Display, function(status) {
       if (status == "lost") {
-        startLevel(n);
-        //loseCount(losses);
+        //player can only lose 3 times, then will restart to level 1
+        if (losses == 3) {
+            //change this to a new screen
+            console.log("You lose! Try again.");
+            startLevel(n - 1);
+        }
+        else 
+          startLevel(n);
       }
       else if (n < plans.length - 1) {
         startLevel(n + 1);
-        //loseCount(losses);
       }
       else
         //won game: change this
