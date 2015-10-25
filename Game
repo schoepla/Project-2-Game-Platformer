@@ -341,6 +341,7 @@ Player.prototype.moveX = function(step, level, keys) {
   // Handle rocks by calling playerTouched
   if (obstacle)
     level.playerTouched(obstacle);
+   // loseCount(); }
   else
     // Move if there's not an obstacle there.
     this.pos = newPos;
@@ -361,11 +362,13 @@ Player.prototype.moveY = function(step, level, keys) {
   // jump if they are touching some obstacle.
   if (obstacle) {
     level.playerTouched(obstacle);
+    //loseCount();
     if (keys.down && this.speed.y > 0)
       this.speed.y = jumpSpeed;
     else
       this.speed.y = 0;
-  } else {
+  } 
+  else {
     this.pos = newPos;
   }
 };
@@ -386,7 +389,6 @@ Player.prototype.act = function(step, level, keys) {
 };
 
 Level.prototype.playerTouched = function(type, actor) {
-
   // if the player touches rocks and the player hasn't won
   // Player loses
   if ((type == "rocks" || type == "shark") && this.status == null) {
@@ -405,6 +407,18 @@ Level.prototype.playerTouched = function(type, actor) {
     }
   }
 };
+
+
+/*
+//lose counter
+Level.prototype.loseCount =function() {
+  var counter = 0;
+  if (this.status == "lost") {
+      counter++;
+      console.log(counter);
+  }
+};
+*/
 
 // Arrow key codes for readibility
 var arrowCodes = {37: "left", 38: "up", 39: "right", 40: "down"};
@@ -483,6 +497,7 @@ function runGame(plans, Display) {
       else if (n < plans.length - 1)
         startLevel(n + 1);
       else
+        //won game: change this
         console.log("You win!");
     });
   }
