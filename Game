@@ -39,6 +39,8 @@ function Level(plan) {
         fieldType = "wall";
       else if (ch == "!")
         fieldType = "rocks";
+      else if (ch == "d")
+        fieldType = "loseScreen";
 
       // "Push" the fieldType, which is a string, onto the gridLine array (at the end).
       gridLine.push(fieldType);
@@ -358,7 +360,6 @@ Player.prototype.moveX = function(step, level, keys) {
   // Handle rocks by calling playerTouched
   if (obstacle)
     level.playerTouched(obstacle);
-   // loseCount(); }
   else
     // Move if there's not an obstacle there.
     this.pos = newPos;
@@ -492,9 +493,12 @@ function runLevel(level, Display, andThen) {
       display.clear();
       if (andThen)
         andThen(level.status);
-        if (level.status == "lost") {
+        if (level.status == "lost" && losses <=2) {
           losses++;
           //console.log(losses);
+        }
+        else if (level.status == "lost") {
+          losses = 0;
         }
       return false;
     }
@@ -508,12 +512,16 @@ function runGame(plans, Display) {
     runLevel(new Level(plans[n]), Display, function(status) {
       if (status == "lost") {
         //player can only lose 3 times, then will restart to level 1
-        if (losses == 3) {
+        if (losses == 2) {
+          var loseImage = document.createElement('img');
+          var loseSource = document.getElementById('loseScreen');
+          //startLevel(4);
             //show You Lose screen
-            //startLevel(4);
-            this.finishDelay = 3;
-            //console.log("You lose! Try again.");
-            //3 losses results in player starting at previous level
+            loseImage.src = 'css/loseScreen.png';
+            loseSource.appendChild(loseImage);        
+            //this.finishDelay = 3000;
+            //source.removeChild(image);
+            //3 losses results in player starting at first level
             startLevel(0);
         }
         else 
@@ -523,8 +531,14 @@ function runGame(plans, Display) {
         startLevel(n + 1);
       }
       else
-        //won game: change this
-        console.log("You win!");
+        //won game
+          //startLevel(4);
+          var winImage = document.createElement('img');
+          var winSource = document.getElementById('winScreen');
+            //show You Lose screen
+          winImage.src = 'css/winScreen.png';
+          winSource.appendChild(winImage);       
+        //console.log("You win!");
     });
 };  
 
