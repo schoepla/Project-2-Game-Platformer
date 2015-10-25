@@ -428,16 +428,6 @@ Level.prototype.playerTouched = function(type, actor) {
 };
 
 
-/*
-//lose counter
-Level.prototype.loseCount =function() {
-  var counter = 0;
-  if (this.status == "lost") {
-      counter++;
-      console.log(counter);
-  }
-};
-*/
 
 // Arrow key codes for readibility
 var arrowCodes = {37: "left", 38: "up", 39: "right", 40: "down"};
@@ -489,10 +479,11 @@ function runAnimation(frameFunc) {
 // presses an arrow key. We can access it from anywhere.
 var arrows = trackKeys(arrowCodes);
 
+var losses = 0;
+
 // Organize a single level and begin animation
 function runLevel(level, Display, andThen) {
   var display = new Display(document.body, level);
-
   runAnimation(function(step) {
     // Allow the viewer to scroll the level
     level.animate(step, arrows);
@@ -501,6 +492,16 @@ function runLevel(level, Display, andThen) {
       display.clear();
       if (andThen)
         andThen(level.status);
+        if (level.status == "lost") {
+          losses++;
+          console.log(losses);
+          if (losses == 3) {
+            //change this to a new screen
+            console.log("You lose! Try again.");
+            runGame(plans, Display);
+
+          }
+        }
       return false;
     }
   });
@@ -511,14 +512,19 @@ function runGame(plans, Display) {
     // Create a new level using the nth element of array plans
     // Pass in a reference to Display function, DOMDisplay (in index.html).
     runLevel(new Level(plans[n]), Display, function(status) {
-      if (status == "lost")
+      if (status == "lost") {
         startLevel(n);
-      else if (n < plans.length - 1)
+        //loseCount(losses);
+      }
+      else if (n < plans.length - 1) {
         startLevel(n + 1);
+        //loseCount(losses);
+      }
       else
         //won game: change this
         console.log("You win!");
     });
-  }
+};  
+
   startLevel(0);
 }
