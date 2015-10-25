@@ -515,7 +515,7 @@ function runGame(plans, Display) {
         if (losses == 2) {
           var loseImage = document.createElement('img');
           var loseSource = document.getElementById('loseScreen');
-          //startLevel(4);
+          //startLevel(3);
             //show You Lose screen
             loseImage.src = 'css/loseScreen.png';
             loseSource.appendChild(loseImage);        
@@ -532,7 +532,7 @@ function runGame(plans, Display) {
       }
       else
         //won game
-          //startLevel(4);
+          //startLevel(3);
           var winImage = document.createElement('img');
           var winSource = document.getElementById('winScreen');
             //show You Lose screen
